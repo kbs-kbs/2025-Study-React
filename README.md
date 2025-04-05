@@ -43,19 +43,24 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
 <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 <script>
-    let count = 0;
-    const P = React.createElement("p", null, "Total clicks: 0");
-    const Button = React.createElement("button", {
-        onClick: handleClick
-    }, "Click me");
-    const Container = React.createElement("div", null, [P, Button]);
+    let count = 0;
 
-    ReactDOM.createRoot(document.body).render(Container);
+    render();
 
-    function handleClick() {
-        count++;
-        document.querySelector('body > div > p').innerText = `Total clicks: ${count}`;
-    }
+    function render() {
+        const P = React.createElement("p", null, `Total clicks: ${count}`);
+        const Button = React.createElement("button", {
+            onClick: handleClick
+        }, "Click me");
+        const Container = React.createElement("div", null, [P, Button]);
+
+        ReactDOM.createRoot(document.body).render(Container);
+    }
+
+    function handleClick() {
+        count++;
+        render();
+    }
 </script>
 </html>
 ```
