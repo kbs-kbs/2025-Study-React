@@ -65,6 +65,14 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
 </html>
 ```
 
+> [!Warning]
+> Warning: createRoot(): Creating roots directly with document.body is discouraged, since its children are often manipulated by third-party scripts and browser extensions. This may lead to subtle reconciliation issues. Try using a container element created for your app.
+>    
+> **해결 방법**:
+> - `document.body` 대신 별도의 컨테이너 요소를 만들어서 React 앱을 렌더링하세요.
+> - React는 `id="root"`와 같은 컨테이너를 사용하는 것을 표준으로 삼고 있습니다.
+
+
 ```html title:react-without-react-dom.html
 <!DOCTYPE html>
 <html>
