@@ -2,14 +2,14 @@
 
 
 ## 리액트 설치
-
-CDN(Content Delivery Network)을 통한 패키지 설치
+CDN(Content Delivery Network)을 통한 라이브러리 설치
 
 ```html
 <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 ```
 
+## 리액트와 바닐라 JS 비교
 
 ```html title:vanilla-js.html
 <!DOCTYPE html>
@@ -36,7 +36,28 @@ CDN(Content Delivery Network)을 통한 패키지 설치
 ```
 
 ```html react.html
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script>
+    let count = 0;
+    const P = React.createElement("p", null, "Total clicks: 0");
+    const Button = React.createElement("button", {
+        onClick: handleClick
+    }, "Click me");
+    const Container = React.createElement("div", null, [P, Button]);
 
+    ReactDOM.createRoot(document.body).render(Container);
+
+    function handleClick() {
+        count++;
+        document.querySelector('body > div > p').innerText = `Total clicks: ${count}`;
+    }
+</script>
+</html>
 ```
 
 ```html title:react-without-react-dom.html
