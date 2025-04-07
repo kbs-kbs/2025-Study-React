@@ -109,7 +109,7 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
 </html>
 ```
 
-```
+```html
 <!DOCTYPE html>
 <html>
 <body>
