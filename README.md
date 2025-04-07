@@ -137,7 +137,7 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
     render(Counter(), root);
 
     function render(element, parent) {
-	    root.textContent = '';
+        root.textContent = '';
         const domElement = document.createElement(element.type);
 
         if ('onClick' in element.props) {
