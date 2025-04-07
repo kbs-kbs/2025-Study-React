@@ -125,7 +125,7 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
     <div id="root"></div>
 </body>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script>
     const { useState } = React;
     const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -144,7 +144,7 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
         return Container
     };
 
-    root.render(Counter);
+    root.render(React.createElement(Counter));
 </script>
 </html>
 ```
