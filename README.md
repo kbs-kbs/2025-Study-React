@@ -111,20 +111,20 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
 
 ```
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <body>
     <div id="root"></div>
 </body>
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script>
     const root = document.getElementById('root');
+    let count = 0;
     const Counter = () => {
-        let count = 0;
-        const P = React.createElement("p", null, `Total clicks: ${count}`);
-        const Button = React.createElement("button", {
+        const P = React.createElement('p', null, `Total clicks: ${count}`);
+        const Button = React.createElement('button', {
             onClick: handleClick
-        }, "Click me");
-        const Container = React.createElement("div", null, [P, Button]);
+        }, 'Click me');
+        const Container = React.createElement('div', null, [P, Button]);
 
         function handleClick() {
             count++;
@@ -137,14 +137,15 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
     render(Counter(), root);
 
     function render(element, parent) {
+	    root.textContent = '';
         const domElement = document.createElement(element.type);
 
         if ('onClick' in element.props) {
-            domElement.addEventListener("click", element.props.onClick);
+            domElement.addEventListener('click', element.props.onClick);
         }
 
         const children = element.props.children
-        if (typeof children === "string") {
+        if (typeof children === 'string') {
             domElement.textContent = children;
         } else {
             React.Children.forEach(children, child => {
