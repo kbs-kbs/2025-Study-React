@@ -76,6 +76,10 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
 > **setState의 역할**:
 > - state의 값을 변경하는 클로저 + 컴포넌트 리렌더링
 
+> [!Note]
+> setState(state + 1)과 setState(state => state + 1)의 차이
+> setState가 리렌더링을 할 때 state는 
+
 ```html title:react-without-react-dom.html
 <!DOCTYPE html>
 <html>
