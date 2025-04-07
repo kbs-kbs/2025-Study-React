@@ -117,3 +117,34 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
 </script>
 </html>
 ```
+
+```html title:react.html
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="root"></div>
+</body>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script>
+    const { useState } = React;
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    const Counter = () => {
+        const [count, setCount] = useState(0);
+        const P = React.createElement('p', null, `Total clicks: ${count}`);
+        const Button = React.createElement('button', {
+            onClick: handleClick
+        }, 'Click me');
+        const Container = React.createElement('div', null, [P, Button]);
+
+        function handleClick() {
+            setCount(count + 1);
+        }
+
+        return Container
+    };
+
+    root.render(Counter);
+</script>
+</html>
+```
