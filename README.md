@@ -73,46 +73,6 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
 <!DOCTYPE html>
 <html>
 <body>
-</body>
-<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script>
-    let count = 0;
-    const P = React.createElement("p", null, "Total clicks: 0");
-    const Button = React.createElement("button", {
-        onClick: handleClick
-    }, "Click me");
-    const Container = React.createElement("div", null, [P, Button]);
-
-    render(Container, document.body);
-
-    function render(element, parent) {
-        const domElement = document.createElement(element.type);
-        if ('onClick' in element.props) {
-            domElement.addEventListener("click", element.props.onClick);
-        }
-        const children = element.props.children
-        if (typeof children === "string") {
-            domElement.textContent = children;
-        } else {
-            React.Children.forEach(children, child => {
-                renderer(child, domElement);
-            })
-        }
-        parent.appendChild(domElement);
-    }
-
-    function handleClick() {
-        count++;
-        document.querySelector('body > div > p').innerText = `Total clicks: ${count}`;
-    }
-</script>
-</html>
-```
-
-```html
-<!DOCTYPE html>
-<html>
-<body>
     <div id="root"></div>
 </body>
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
