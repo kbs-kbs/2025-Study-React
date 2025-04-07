@@ -69,6 +69,13 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
 > - React는 `id="root"`와 같은 컨테이너를 사용하는 것을 표준으로 삼고 있습니다.
 
 
+
+> [!Note]
+> **state의 역할**:
+> 지역변수
+> **setState의 역할**:
+> - state의 값을 변경하는 클로저 + 컴포넌트 리렌더링
+
 ```html title:react-without-react-dom.html
 <!DOCTYPE html>
 <html>
