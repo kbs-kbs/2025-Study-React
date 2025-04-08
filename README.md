@@ -110,7 +110,7 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
     render(Counter(), root);
 
     function render(element, parent) {
-        parent.textContent = '';
+        root.textContent = '';
         const domElement = document.createElement(element.type);
 
         if ('onClick' in element.props) {
@@ -137,12 +137,13 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
 <body>
     <div id="root"></div>
 </body>
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script>
+<script type="module">
+    import React from "https://esm.sh/react@19/?dev";
+    import ReactDOMClient from "https://esm.sh/react-dom@19/?dev";
+
     const { useState } = React;
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    const Counter = () => {
+    const root = ReactDOMClient.createRoot(document.getElementById('root'));
+    const Counter = (() => {
         const [count, setCount] = useState(0);
         const P = React.createElement('p', null, `Total clicks: ${count}`);
         const Button = React.createElement('button', {
@@ -155,9 +156,9 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
         }
 
         return Container
-    };
+    })();
 
-    root.render(React.createElement(Counter));
+    root.render(Counter());
 </script>
 </html>
 ```
