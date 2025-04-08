@@ -86,29 +86,31 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
 <body>
     <div id="root"></div>
 </body>
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script>
+<script type="module">
+    import React from "https://esm.sh/react@19/?dev";
+
     const root = document.getElementById('root');
-    let count = 0;
-    const Counter = () => {
-        const P = React.createElement('p', null, `Total clicks: ${count}`);
-        const Button = React.createElement('button', {
-            onClick: handleClick
-        }, 'Click me');
-        const Container = React.createElement('div', null, [P, Button]);
+    const Counter = (() => {
+        let count = 0;
+        return (() => {
+            const P = React.createElement('p', null, `Total clicks: ${count}`);
+            const Button = React.createElement('button', {
+                onClick: handleClick
+            }, 'Click me');
 
-        function handleClick() {
-            count++;
-            render(Counter(), root);
-        }
+            return React.createElement('div', null, [P, Button]);
 
-        return Container
-    };
+            function handleClick() {
+                count++;
+                render(Counter(), root);
+            }
+        });
+    })();
 
     render(Counter(), root);
 
     function render(element, parent) {
-        root.textContent = '';
+        parent.textContent = '';
         const domElement = document.createElement(element.type);
 
         if ('onClick' in element.props) {
