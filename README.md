@@ -88,8 +88,9 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
 > - state의 값을 변경하는 클로저 + 컴포넌트 리렌더링
 
 > [!Note]
-> setState(state + 1)과 setState(state => state + 1)의 차이
-> setState가 리렌더링을 할 때 state는 
+> setState(state + 1)과 setState((state) => state + 1)의 차이   
+> 이벤트에서 setState(state + 1)을 3번 실행하면 결과는 (처음 state) + 1 이 됨
+> 반면, setState((state) => state + 1)을 3번 실행하면 (처음 state) + 3이 됨
 
 ```html title:react-without-react-dom.html
 <!DOCTYPE html>
