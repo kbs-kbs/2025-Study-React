@@ -41,22 +41,33 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
 <body>
     <div id="root"></div>
 </body>
-<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script>
-    let count = 0;
-    const P = React.createElement('p', null, `Total clicks: ${count}`);
-    const Button = React.createElement('button', {
-        onClick: handleClick
-    }, 'Click me');
-    const Container = React.createElement('div', null, [P, Button]);
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(Container);
+<script type="module">
+    import React from 'https://esm.sh/react@19/?dev';
+    import ReactDOMClient from 'https://esm.sh/react-dom@19/client?dev';
 
-    function handleClick() {
-        count++;
-        P.render(Container);
-    }
+    const root = ReactDOMClient.createRoot(document.getElementById('root'));
+
+    const Counter = () => {
+        const [count, setCount] = React.useState(0);
+
+        function handleClick() {
+            setCount(count + 1); // 렌더링 코드 필요 없음
+        }
+
+        return React.createElement('div', null, [
+            React.createElement('p', null, `Total clicks: ${count}`),
+            React.createElement('button', {
+                onClick: handleClick
+            }, 'Click me')
+        ]);
+    };
+
+    const DoubleCounter = React.createElement('div', null, [
+        React.createElement(Counter),
+        React.createElement(Counter)
+    ]);
+
+    root.render(DoubleCounter);
 </script>
 </html>
 ```
@@ -87,49 +98,55 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
     <div id="root"></div>
 </body>
 <script type="module">
-    import React from "https://esm.sh/react@19/?dev";
+    import React from 'https://esm.sh/react@19/?dev';
 
     const root = document.getElementById('root');
     const Counter = (() => {
         let count = 0;
-        return (() => {
-            const P = React.createElement('p', null, `Total clicks: ${count}`);
-            const Button = React.createElement('button', {
-                onClick: handleClick
-            }, 'Click me');
-
-            return React.createElement('div', null, [P, Button]);
-
+        return () => {
             function handleClick() {
                 count++;
                 render(Counter(), root);
             }
-        });
-    })();
+
+            return React.createElement('div', null, [
+                React.createElement('p', null, `Total clicks: ${count}`),
+                React.createElement('button', {
+                    onClick: handleClick
+                }, 'Click me')
+            ]);
+        };
+    })(); // 즉시 실행 함수(IIFE)
 
     render(Counter(), root);
 
     function render(element, parent) {
-        root.textContent = '';
         const domElement = document.createElement(element.type);
+        const children = element.props.children;
+
+        if (parent == root) {
+            root.textContent = '';
+        }
 
         if ('onClick' in element.props) {
             domElement.addEventListener('click', element.props.onClick);
-        }
+        } // 예시로 'onClick'만 체크
 
-        const children = element.props.children
         if (typeof children === 'string') {
             domElement.textContent = children;
         } else {
             React.Children.forEach(children, child => {
                 render(child, domElement);
-            })
+            });
         }
+
         parent.appendChild(domElement);
     }
 </script>
 </html>
 ```
+
+
 
 ```html title:react.html
 <!DOCTYPE html>
