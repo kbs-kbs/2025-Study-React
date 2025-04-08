@@ -148,34 +148,39 @@ CDN(Content Delivery Network)을 통한 라이브러리 설치
 
 
 
-```html title:react.html
+```html title:react-double-counter.html
 <!DOCTYPE html>
 <html>
 <body>
     <div id="root"></div>
 </body>
 <script type="module">
-    import React from "https://esm.sh/react@19/?dev";
-    import ReactDOMClient from "https://esm.sh/react-dom@19/?dev";
+    import React from 'https://esm.sh/react@19/?dev';
+    import ReactDOMClient from 'https://esm.sh/react-dom@19/client?dev';
 
-    const { useState } = React;
     const root = ReactDOMClient.createRoot(document.getElementById('root'));
-    const Counter = (() => {
-        const [count, setCount] = useState(0);
-        const P = React.createElement('p', null, `Total clicks: ${count}`);
-        const Button = React.createElement('button', {
-            onClick: handleClick
-        }, 'Click me');
-        const Container = React.createElement('div', null, [P, Button]);
+
+    const Counter = () => {
+        const [count, setCount] = React.useState(0);
 
         function handleClick() {
-            setCount(count + 1);
+            setCount((count) => count + 1); // 렌더링 코드 필요 없음
         }
 
-        return Container
-    })();
+        return React.createElement('div', null, [
+            React.createElement('p', null, `Total clicks: ${count}`),
+            React.createElement('button', {
+                onClick: handleClick
+            }, 'Click me')
+        ]);
+    };
 
-    root.render(Counter());
+    const DoubleCounter = React.createElement('div', null, [
+        React.createElement(Counter),
+        React.createElement(Counter)
+    ]);
+
+    root.render(DoubleCounter);
 </script>
 </html>
 ```
